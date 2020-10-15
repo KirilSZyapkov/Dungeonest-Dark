@@ -26,6 +26,7 @@ function dungeonestDark(input) {
             case "potion":
                 myHealth += Number(num);
                 if (myHealth > 100) {
+                    num = 100 - (myHealth - num);
                     myHealth = 100;
                     console.log(`You healed for ${num} hp.`);
                     console.log(`Current health: ${myHealth} hp.`);
