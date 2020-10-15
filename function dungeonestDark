@@ -1,0 +1,63 @@
+function dungeonestDark(input) {
+    let dungeon = input.toString();
+    let myDungeon = [];
+    let str = "";
+    let myHealth = 100;
+    let myCoins = 0;
+    let itemOrMonster = "";
+    let num = 0;
+    let currentRoom = 0;
+    let isDungeonPass = [];
+    let isDead = false;
+    for (let a = 0; a < dungeon.length; a++) {
+        while (dungeon[a] !== " " && dungeon[a] !== "|" && dungeon[a] !== undefined) {
+            str += dungeon[a];
+            a++;
+        }
+        myDungeon.push(str);
+        str = "";
+    }
+
+    for (let b = 0; b < myDungeon.length; b += 2) {
+        currentRoom++;
+        itemOrMonster = myDungeon[b];
+        num = myDungeon[b + 1];
+        switch (itemOrMonster) {
+            case "potion":
+                myHealth += Number(num);
+                if (myHealth > 100) {
+                    myHealth = 100;
+                    console.log(`You healed for ${num} hp.`);
+                    console.log(`Current health: ${myHealth} hp.`);
+                } else {
+                    console.log(`You healed for ${num} hp.`);
+                    console.log(`Current health: ${myHealth} hp.`);
+                }
+                break;
+            case "chest":
+                myCoins += Number(num);
+                console.log(`You found ${num} coins.`);
+                break;
+            default:
+                myHealth -= Number(num);
+                if (myHealth <= 0) {
+                    console.log(`You died! Killed by ${itemOrMonster}.`);
+                    console.log(`Best room: ${currentRoom}`)
+                    isDead = true;
+                } else {
+                    console.log(`You slayed ${itemOrMonster}`);
+                }
+                break;
+        }
+        if (isDead) {
+            break;
+        }
+        isDungeonPass.push(myDungeon[b], myDungeon[b + 1]);
+
+    }
+    if (isDead) {
+    } else {
+        (isDungeonPass.length === myDungeon.length)
+        console.log(`You've made it!", "Coins: ${myCoins}", "Health: ${myHealth}`);
+    }
+}
